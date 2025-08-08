@@ -4,11 +4,14 @@ from pydantic import BaseModel, Field
 import pandas as pd
 import joblib
 from typing import List
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 ########################################################################
 # 1. Carga del pipeline entrenado (incluye preprocesamiento + modelo)  #
 ########################################################################
-MODEL_PATH = "models/penguin_mass_model.joblib"
+MODEL_PATH = os.environ["MODEL_PATH"]
 pipe = joblib.load(MODEL_PATH)
 
 ###############################################
