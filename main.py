@@ -8,7 +8,7 @@ from typing import List
 ########################################################################
 # 1. Carga del pipeline entrenado (incluye preprocesamiento + modelo)  #
 ########################################################################
-MODEL_PATH = "penguin_mass_model.joblib"
+MODEL_PATH = "models/penguin_mass_model.joblib"
 pipe = joblib.load(MODEL_PATH)
 
 ###############################################
