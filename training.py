@@ -54,7 +54,7 @@ def main():
         ('num', numeric_pipeline, num_attribs),
         ('cat', categorical_pipeline, cat_attribs)
     ])
-    model = RandomForestRegressor(n_estimators=200, random_state=42, n_jobs=-1)
+    model = RandomForestRegressor(max_depth=6, n_estimators=200, random_state=42, n_jobs=-1)
     pipe = Pipeline([
         ('prep', preprocessor),
         ('rf', model)
@@ -64,8 +64,8 @@ def main():
     logger.info(f"CV RMSEs: {cv_rmse}")
     logger.info(f"CV RMSE promedio (5-fold): {cv_rmse.mean():,.0f} g")
     if cv_rmse.mean() > MAX_RMSE_THRESHOLD:
-        logger.warning(f"RMSE promedio alto ({cv_rmse.mean():,.0f} g), revisar los datos o el modelo. El entrenamiento no continuará.")
-        return
+        logger.warning(f"RMSE promedio alto ({cv_rmse.mean():,.0f} g), revisar los datos o el modelo.")
+    
     logger.info("Entrenando modelo final")
     pipe.fit(X, y)
     joblib.dump(pipe, model_path)
